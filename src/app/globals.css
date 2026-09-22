@@ -1,0 +1,133 @@
+/* ========================================================
+   APERTURE — tokens, base and shared utilities
+   Type system + frame ported from the Tooplate 2170 template.
+   Cream / coral come from the reference animation video.
+   ======================================================== */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* frame thickness: top/left/right = --frame, bottom = --frame-bottom */
+  --frame: 40px;
+  --frame-bottom: 40px;
+  /* height of the visible area *inside* the frame */
+  --inner-h: calc(100svh - var(--frame) - var(--frame-bottom));
+
+  --charcoal: #0d0d0d;
+  --charcoal-soft: #1a1a1a;
+  --paper: #f8f1ec;
+  --coral: #ec6844;
+
+  --white: #ffffff;
+  --white-dim: rgba(255, 255, 255, 0.5);
+  --white-body: rgba(255, 255, 255, 0.68);
+  --white-ghost: rgba(255, 255, 255, 0.14);
+  --ink-dim: rgba(13, 13, 13, 0.6);
+  --ink-body: rgba(13, 13, 13, 0.74);
+  --ink-ghost: rgba(13, 13, 13, 0.16);
+  --frame-bg: var(--paper);
+  --frame-fg: var(--charcoal);
+  --frame-fg-dim: var(--ink-dim);
+  --frame-fg-ghost: var(--ink-ghost);
+
+  --line: 0.5px;
+  --serif: "Cormorant Garamond", Georgia, serif;
+  --mono: "Roboto Mono", "Courier New", monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --frame: 16px;
+    --frame-bottom: 60px;
+  }
+}
+
+/* Section themes: components read --fg* so they work on either surface */
+.theme-ink {
+  --fg: var(--white);
+  --fg-dim: var(--white-dim);
+  --fg-body: var(--white-body);
+  --fg-ghost: var(--white-ghost);
+  background: var(--charcoal);
+  color: var(--fg);
+}
+.theme-paper {
+  --fg: var(--charcoal);
+  --fg-dim: var(--ink-dim);
+  --fg-body: var(--ink-body);
+  --fg-ghost: var(--ink-ghost);
+  background: var(--paper);
+  color: var(--fg);
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--white-ghost) transparent;
+}
+
+body {
+  background: var(--charcoal);
+  color: var(--white);
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img { display: block; max-width: 100%; }
+
+::selection {
+  background: var(--white);
+  color: var(--charcoal);
+}
+
+/* Visible keyboard focus everywhere */
+:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------
+   Intro elements start hidden (only when JS is running) and
+   are revealed by GSAP. The failsafe guarantees they show up
+   even if the animation script never runs.
+   -------------------------------------------------------- */
+.js [data-intro] {
+  opacity: 0;
+  visibility: hidden;
+  animation: introFailsafe 0s 5s forwards;
+}
+@keyframes introFailsafe {
+  to { opacity: 1; visibility: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-intro] {
+    opacity: 1;
+    visibility: visible;
+    animation: none;
+  }
+}
+
+/* main column — everything scrolls *inside* the frame */
+.lookbook {
+  padding: var(--frame) var(--frame) var(--frame-bottom);
+}

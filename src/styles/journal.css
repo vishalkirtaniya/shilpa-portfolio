@@ -1,0 +1,266 @@
+/* ========================================================
+   JOURNAL — editorial split panel (ported from Aperture)
+   ======================================================== */
+
+.lookbook__journal {
+  min-height: var(--inner-h);
+  display: flex;
+  flex-direction: column;
+  padding: 100px 20px;
+  background: var(--charcoal);
+}
+.lookbook__journal-inner { max-width: 1100px; width: 100%; margin: 0 auto; }
+
+.lookbook__journal-heading {
+  font-family: var(--serif);
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 56px;
+  color: var(--white);
+}
+
+.lookbook__journal-spread {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 420px;
+  position: relative;
+}
+
+.lookbook__journal-list {
+  list-style: none;
+  border-right: var(--line) solid var(--white-ghost);
+  padding-right: 40px;
+}
+
+.lookbook__journal-entry {
+  border-top: var(--line) solid var(--white-ghost);
+  position: relative;
+  transition: background 0.3s var(--ease-in-out);
+}
+.lookbook__journal-entry:last-child { border-bottom: var(--line) solid var(--white-ghost); }
+.lookbook__journal-entry:hover { background: rgba(255, 255, 255, 0.02); }
+.lookbook__journal-entry.is-active { background: rgba(255, 255, 255, 0.03); }
+
+/* active indicator — thin vertical bar */
+.lookbook__journal-entry::after {
+  content: "";
+  position: absolute;
+  right: -1px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--white);
+  transform: scaleY(0);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.lookbook__journal-entry.is-active::after { transform: scaleY(1); }
+
+.lookbook__journal-entry-btn {
+  display: block;
+  width: 100%;
+  padding: 24px 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.lookbook__journal-entry-header {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: baseline;
+  gap: 20px;
+}
+.lookbook__journal-date {
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: var(--white-dim);
+  white-space: nowrap;
+}
+.lookbook__journal-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  transition: color 0.3s var(--ease-in-out);
+}
+.lookbook__journal-entry:not(.is-active) .lookbook__journal-title { color: var(--white-dim); }
+.lookbook__journal-entry:not(.is-active):hover .lookbook__journal-title { color: var(--white); }
+.lookbook__journal-tag {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  border: var(--line) solid var(--white-ghost);
+  padding: 4px 10px;
+  white-space: nowrap;
+}
+
+/* reading panel */
+.lookbook__journal-panel {
+  padding-left: 40px;
+  position: relative;
+  overflow: hidden;
+}
+.lookbook__journal-panel-empty {
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  right: 0;
+  transform: translateY(-50%);
+  text-align: center;
+  transition: opacity 0.4s var(--ease-in-out);
+}
+.lookbook__journal-panel-empty span {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  opacity: 0.6;
+}
+.lookbook__journal-panel.has-content .lookbook__journal-panel-empty { opacity: 0; pointer-events: none; }
+
+/* every article is stacked; GSAP fades the active one in/out */
+.lookbook__journal-content {
+  position: absolute;
+  top: 0;
+  left: 40px;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+.lookbook__journal-content-tag {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  margin-bottom: 16px;
+}
+.lookbook__journal-content-title {
+  font-family: var(--serif);
+  font-size: clamp(24px, 3vw, 34px);
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.03em;
+  line-height: 1.35;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+.lookbook__journal-content-body {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--white-body);
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+}
+.lookbook__journal-content-body p + p { margin-top: 16px; }
+.lookbook__journal-content-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: var(--line) solid var(--white-ghost);
+}
+.lookbook__journal-read-more {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--white-dim);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s var(--ease-in-out);
+}
+.lookbook__journal-read-more::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.lookbook__journal-read-more:hover { color: var(--white); }
+.lookbook__journal-read-more:hover::after { transform: scaleX(1); transform-origin: left; }
+.lookbook__journal-read-time { font-size: 8px; letter-spacing: 0.15em; color: var(--white-dim); opacity: 0.7; }
+
+.lookbook__journal-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: var(--line) solid var(--white-ghost);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease-in-out), border-color 0.3s ease;
+  z-index: 2;
+}
+.lookbook__journal-close::before,
+.lookbook__journal-close::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 1px;
+  background: var(--white-dim);
+  transition: background 0.3s ease;
+}
+.lookbook__journal-close::before { transform: rotate(45deg); }
+.lookbook__journal-close::after  { transform: rotate(-45deg); }
+.lookbook__journal-close:hover { border-color: var(--white-dim); }
+.lookbook__journal-close:hover::before,
+.lookbook__journal-close:hover::after { background: var(--white); }
+.lookbook__journal-panel.has-content .lookbook__journal-close { opacity: 1; pointer-events: auto; }
+
+@media (max-width: 768px) {
+  .lookbook__journal-spread { grid-template-columns: 1fr; min-height: auto; }
+  .lookbook__journal-list { border-right: none; padding-right: 0; }
+  .lookbook__journal-entry-header { grid-template-columns: 1fr; gap: 6px; }
+  .lookbook__journal-date { order: -1; }
+  .lookbook__journal-tag { justify-self: start; }
+  .lookbook__journal-entry::after { display: none; }
+
+  /* panel becomes a full-screen sheet on mobile */
+  .lookbook__journal-panel {
+    position: fixed;
+    inset: 0;
+    background: var(--charcoal);
+    z-index: 200;
+    padding: 60px 24px 24px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: translateY(100%);
+    visibility: hidden;
+    transition: transform 0.6s var(--ease-out-expo), visibility 0s linear 0.6s;
+  }
+  .lookbook__journal-panel.is-open {
+    transform: translateY(0);
+    visibility: visible;
+    transition: transform 0.6s var(--ease-out-expo), visibility 0s;
+  }
+  .lookbook__journal-panel-empty { display: none; }
+  .lookbook__journal-content { left: 24px; right: 24px; }
+  .lookbook__journal-close {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 210;
+    opacity: 0;
+  }
+  .lookbook__journal-panel.is-open .lookbook__journal-close { opacity: 1; pointer-events: auto; }
+}

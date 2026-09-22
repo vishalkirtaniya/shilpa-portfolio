@@ -1,0 +1,119 @@
+/* ========================================================
+   HERO — cream field, floating cards, flip-open headline
+   ======================================================== */
+
+.hero {
+  position: relative;
+  height: var(--inner-h);
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero__cards { position: absolute; inset: 0; z-index: 0; }
+
+/* Four nested layers so scroll, mouse, drift and intro never fight over
+   the same transform:  card (scroll) > mouse > float > shape (intro)  */
+.hero__card {
+  position: absolute;
+  width: calc(clamp(56px, 7vw, 128px) * var(--w, 1));
+  aspect-ratio: var(--r, 0.8);
+}
+.hero__card-mouse,
+.hero__card-float,
+.hero__card-shape { width: 100%; height: 100%; }
+.hero__card-shape { position: relative; }
+.hero__card-img { position: absolute; inset: 0; overflow: hidden; display: block; }
+.hero__card-shape img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out-expo);
+}
+.hero__card:hover img { transform: scale(1.08); }
+
+.hero__card-label {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  font-size: 7px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  white-space: nowrap;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  padding: 24px 32px;
+}
+
+.hero__title {
+  font-family: var(--serif);
+  font-size: clamp(48px, 10vw, 140px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 0.9;
+  margin-bottom: 24px;
+}
+.hero__line { display: block; }
+.hero__line-inner { display: inline-block; will-change: transform; }
+.hero__line--em .hero__line-inner {
+  font-style: italic;
+  font-weight: 300;
+  font-size: 0.55em;
+  letter-spacing: 0.25em;
+  opacity: 0.6;
+  margin-top: 8px;
+}
+
+.hero__subtitle {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-top: 12px;
+}
+
+.hero__scroll-cue {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+}
+.hero__scroll-cue span {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--charcoal), transparent);
+  opacity: 0.5;
+  animation: scrollPulse 2s var(--ease-in-out) infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.2; transform: scaleY(0.6); }
+  50% { opacity: 0.8; transform: scaleY(1); }
+}
+@media (prefers-reduced-motion: reduce) { .hero__scroll-line { animation: none; } }
+
+@media (max-width: 768px) {
+  .hero__card--desktop,
+  .hero__card-label { display: none; }
+  .hero__content { padding: 16px; }
+}

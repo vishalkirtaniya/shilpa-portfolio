@@ -1,0 +1,108 @@
+/* ========================================================
+   STATEMENT — the black curtain
+   ======================================================== */
+
+.statement {
+  position: relative;
+  min-height: var(--inner-h);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  padding: clamp(72px, 12vh, 140px) clamp(20px, 5vw, 72px);
+}
+
+.statement__grid {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(32px, 110px) 1fr;
+  column-gap: clamp(12px, 3vw, 48px);
+}
+
+.statement__mark {
+  font-family: var(--serif);
+  font-size: clamp(56px, 7vw, 110px);
+  font-weight: 300;
+  line-height: 0.8;
+  color: var(--fg);
+  display: block;
+}
+
+.statement__label {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg-dim);
+  margin-bottom: 28px;
+}
+
+.statement__title {
+  font-family: var(--serif);
+  font-size: clamp(30px, 5.2vw, 84px);
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin-bottom: clamp(32px, 6vh, 64px);
+}
+
+.statement__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 4vw, 56px);
+  max-width: 680px;
+}
+.statement__cols p {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+  color: var(--fg-body);
+}
+.statement__cta {
+  display: inline-block;
+  margin-top: 20px;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: var(--line) solid var(--fg-dim);
+  padding-bottom: 4px;
+  transition: border-color 0.4s var(--ease-in-out);
+}
+.statement__cta:hover { border-color: var(--fg); }
+
+/* Tilted photo whose corner rises into view at the bottom — the seam
+   into the next section. Outer box = translation, inner = 45° rotation. */
+.statement__diamond {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: min(38vw, 420px);
+  aspect-ratio: 1;
+  z-index: 0;
+  pointer-events: none;
+}
+.statement__diamond-inner {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: rotate(45deg);
+}
+.statement__diamond-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(-45deg) scale(1.5);
+}
+
+@media (max-width: 768px) {
+  .statement__grid { grid-template-columns: 1fr; row-gap: 12px; }
+  .statement__cols { grid-template-columns: 1fr; }
+  .statement__diamond { width: 64vw; }
+}
