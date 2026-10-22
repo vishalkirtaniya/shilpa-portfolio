@@ -6,11 +6,12 @@ import { useMotion } from "@/lib/useMotion";
 import { counter } from "@/lib/counter";
 import { scrollToHash } from "@/lib/lenis";
 import { brand, nav, social } from "@/lib/content";
-import {frameThemes, type FrameTheme} from "@/lib/frameTheme";
+import { frameThemes, type FrameTheme } from "@/lib/frameTheme";
 
 const mobileNav = [
   { href: "#lookbook", label: "Work", icon: "grid" },
   { href: "#about", label: "Lens", icon: "lens" },
+  { href: "#experience", label: "Exp.", icon: "case" },
   { href: "#journal", label: "Journal", icon: "info" },
   { href: "#contact", label: "Reach", icon: "mail" },
 ];
@@ -31,6 +32,11 @@ export default function Frame() {
     });
   }, root);
 
+  // Live frame color: every section marks itself with data-frame="paper" | "ink" | "blue".
+  // On every scroll frame we find whichever one's top edge has crossed the
+  // frame's inner line and crossfade the frame's CSS variables to match —
+  // this also works correctly for the pinned Lens section, since its pin
+  // starts at that same line (see Lens.tsx).
   useGSAP(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-frame]"));
     if (!sections.length) return;
@@ -55,22 +61,22 @@ export default function Frame() {
     const check = (instant = false) => {
       const line = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--frame")) || 0;
       let active = sections[0];
-      for (const section of sections) {
-        if (section.getBoundingClientRect().top <= line) active = section;
-        else break;
-      }
-      apply((active.dataset.frame as FrameTheme) || "paper", instant);
+        for (const section of sections) {
+          if (section.getBoundingClientRect().top <= line) active = section;
+          else break;
+        }
+        apply((active.dataset.frame as FrameTheme) || "paper", instant);
     };
 
     check(true);
-    const st = ScrollTrigger.create({
-      trigger: document.body,
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: () => check(),
-      onRefresh: () => check(true),
-    });
-    return () => st.kill();
+    const onScroll = () => check();
+    const onRefresh = () => check(true);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    ScrollTrigger.addEventListener("refresh", onRefresh);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      ScrollTrigger.removeEventListener("refresh", onRefresh);
+    };
   }, []);
 
   const go = (href: string) => (e: React.MouseEvent) => {
@@ -95,17 +101,7 @@ export default function Frame() {
         </a>
       </header>
 
-      <div className="frame__wordmark" data-intro>
-        <span>{brand.name}</span>
-      </div>
-
-      <aside className="frame__sidebar-left" data-intro>
-        <div className="frame__counter" aria-label={`Plate ${plate} of 06`}>
-          <span className="current">{plate}</span> / 06 — Collection
-        </div>
-      </aside>
-
-      <nav className="frame__sidebar-right" aria-label="Main navigation" data-intro>
+      <nav className="frame__nav-top" aria-label="Main navigation" data-intro>
         <ul className="frame__nav">
           {nav.map((item) => (
             <li key={item.href}>
@@ -116,6 +112,18 @@ export default function Frame() {
           ))}
         </ul>
       </nav>
+
+      <aside className="frame__sidebar-left" data-intro>
+        <div className="frame__counter" aria-label={`Plate ${plate} of 06`}>
+          <span className="current">{plate}</span> / 06 — Collection
+        </div>
+      </aside>
+
+      <aside className="frame__sidebar-right" data-intro>
+        <div className="frame__wordmark" aria-hidden="true">
+          {brand.name}
+        </div>
+      </aside>
 
       <footer className="frame__bottom" data-intro>
         <span className="frame__credit">

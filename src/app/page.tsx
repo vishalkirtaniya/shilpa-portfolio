@@ -7,6 +7,7 @@ import Lens from "@/components/Lens";
 import Plates from "@/components/Plates";
 import Journal from "@/components/Journal";
 import Contact from "@/components/Contact";
+import Experience from "@/components/Experience";
 
 export default function Page() {
   return (
@@ -16,9 +17,10 @@ export default function Page() {
       <Frame />
       <main className="lookbook" id="lookbook">
         <Hero />
-        <Statement />
+        {/* <Statement /> */}
         <Lens />
         <Plates />
+        <Experience />
         <Journal />
         <Contact />
       </main>

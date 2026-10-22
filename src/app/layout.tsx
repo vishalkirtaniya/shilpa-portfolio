@@ -18,6 +18,9 @@ import "../styles/plates.css";
 import "../styles/journal.css";
 import "../styles/contact.css";
 import "../styles/cursor.css";
+import "../styles/statement.css";
+import "../styles/experience.css";
+import "../styles/lens.css";
 
 export const metadata: Metadata = {
   title: "Aperture — Visual Lookbook",

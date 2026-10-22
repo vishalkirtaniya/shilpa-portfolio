@@ -14,6 +14,7 @@ export const brand = {
 export const nav = [
   { href: "#lookbook", label: "Lookbook" },
   { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
   { href: "#journal", label: "Journal" },
   { href: "#contact", label: "Contact" },
 ];
@@ -219,4 +220,44 @@ export const journal: JournalEntry[] = [
 export const contact = {
   heading: "Inquire",
   text: "For commissions, collaborations, and private viewings — we respond within twenty-four hours.",
+};
+
+/* ---------------------------------------------------------- Experience */
+// Placeholder history — swap in your own roles, dates and skills.
+
+export type ExperienceEntry = {
+  role: string;
+  org: string;
+  period: string;
+  note: string;
+};
+
+export const experience = {
+  eyebrow: "Experience",
+  title: "Years behind the lens, not just in front of a screen.",
+  intro: {
+    kicker: "Open to work",
+    title: "Let's Build Something",
+    subtitle: "Available for commissions, collaborations and full-time roles.",
+    cta: { label: "Let's Talk", href: "#contact" },
+  },
+  left: [
+    { role: "Lead Photographer", org: "Aperture Visual", period: "2023 — Present", note: "Interior and architectural photography for residential studios." },
+    { role: "Visual Designer", org: "Studio Nord", period: "2021 — 2023", note: "Art direction for three published lookbooks." },
+    { role: "Freelance Photographer", org: "Self-employed", period: "2019 — 2021", note: "Editorial and commercial shoots across three countries." },
+    { role: "Photography Intern", org: "Formwork Studio", period: "2018 — 2019", note: "Assisted on location for twelve architectural commissions." },
+    { role: "Studio Assistant", org: "Halide & Co.", period: "2017 — 2018", note: "Lighting setup and darkroom process for product shoots." },
+  ] satisfies ExperienceEntry[],
+  right: [
+    { role: "Contributing Photographer", org: "Material Quarterly", period: "2022 — Present", note: "Recurring feature on texture and material in domestic spaces." },
+    { role: "Workshop Instructor", org: "Académie des Arts", period: "2020 — 2022", note: "Taught composition and natural light to second-year students." },
+    { role: "BA, Photography", org: "Académie des Arts", period: "2015 — 2018", note: "Thesis on restraint and negative space in interior work." },
+    { role: "Gallery Assistant", org: "Annex Project Space", period: "2016 — 2017", note: "Installed and lit six group exhibitions over one year." },
+    { role: "First Camera", org: "—", period: "2012", note: "Where it started: a borrowed camera and a stairwell." },
+  ] satisfies ExperienceEntry[],
+  skills: [
+    "Architectural Photography", "Art Direction", "Lightroom", "Capture One",
+    "Studio Lighting", "Film Processing", "Color Grading", "Editorial Layout",
+    "Location Scouting", "Client Direction",
+  ],
 };

@@ -11,6 +11,12 @@ export const frameThemes = {
     fgDim: "rgba(255, 255, 255, 0.5)",
     fgGhost: "rgba(255, 255, 255, 0.14)",
   },
+  blue: {
+    bg: "#1769ff",
+    fg: "#ffffff",
+    fgDim: "rgba(255, 255, 255, 0.65)",
+    fgGhost: "rgba(255, 255, 255, 0.25)",
+  },
 } as const;
 
 export type FrameTheme = keyof typeof frameThemes;

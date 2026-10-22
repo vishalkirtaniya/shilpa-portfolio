@@ -20,6 +20,16 @@ const POINTS = 26;
 const CORAL = "236,104,68";
 
 type Theme = "light" | "dark" | null;
+const FRAME_TO_TRAIL: Record<string, Theme> = { paper: "light", ink: "dark", blue: "dark" };
+
+/** Trail colour for whatever the pointer is over, or undefined if it's over
+ *  no section at all (e.g. the frame's nav) — in which case we keep the last one. */
+function trailFor(target: Element | null): Theme | undefined {
+  const explicit = target?.closest("[data-trail]")?.getAttribute("data-trail");
+  if (explicit === "light" || explicit === "dark") return explicit;
+  const frame = target?.closest<HTMLElement>("[data-frame]")?.dataset.frame;
+  return frame ? FRAME_TO_TRAIL[frame] : undefined;
+}
 
 export default function RopeCursor() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -94,7 +104,8 @@ export default function RopeCursor() {
       badgeY(e.clientY);
 
       const target = e.target as Element | null;
-      theme = (target?.closest("[data-trail]")?.getAttribute("data-trail") as Theme) ?? null;
+      const next = trailFor(target);
+      if (next !== undefined) theme = next;
       setBadge(!!target?.closest('[data-cursor="badge"]'));
     };
     const onLeave = () => {

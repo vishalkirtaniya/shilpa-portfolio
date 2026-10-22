@@ -68,7 +68,9 @@
   text-transform: uppercase;
 }
 
-.frame__wordmark {
+/* top-center: the horizontal nav, spanning the gap between the logo
+   and the right edge of the frame */
+.frame__nav-top {
   position: fixed;
   top: 0;
   left: var(--frame);
@@ -78,16 +80,6 @@
   align-items: center;
   justify-content: center;
   z-index: 110;
-  pointer-events: none;
-}
-.frame__wordmark span {
-  font-family: var(--serif);
-  font-size: 13px;
-  font-weight: 300;
-  letter-spacing: 0.45em;
-  text-transform: uppercase;
-  color: var(--frame-fg);
-  opacity: 0.7;
 }
 
 .frame__sidebar-left,
@@ -119,11 +111,27 @@
   display: inline-block;
 }
 
+/* right sidebar: the brand wordmark, set vertically to mirror the
+   counter on the left — purely decorative (the logo link is the
+   accessible way to get home), so it's aria-hidden in the markup */
+.frame__wordmark {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--frame-fg);
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
 .frame__nav {
   list-style: none;
-  writing-mode: vertical-rl;
   display: flex;
-  gap: 28px;
+  align-items: center;
+  gap: 24px;
 }
 .frame__nav li a {
   font-size: 9px;
@@ -138,19 +146,19 @@
 .frame__nav li a::after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1px;
   background: var(--frame-fg);
-  transform: scaleY(0);
-  transform-origin: top;
+  transform: scaleX(0);
+  transform-origin: right;
   transition: transform 0.5s var(--ease-out-expo);
 }
 .frame__nav li a:hover,
 .frame__nav li a:focus-visible { color: var(--frame-fg); }
 .frame__nav li a:hover::after,
-.frame__nav li a:focus-visible::after { transform: scaleY(1); }
+.frame__nav li a:focus-visible::after { transform: scaleX(1); transform-origin: left; }
 
 .frame__bottom {
   position: fixed;
@@ -229,11 +237,11 @@
 
   .frame__sidebar-left,
   .frame__sidebar-right,
+  .frame__nav-top,
   .frame__credit,
   .frame__social,
   .frame__corner { display: none; }
 
-  .frame__wordmark span { font-size: 10px; letter-spacing: 0.3em; }
   .frame__logo a { font-size: 10px; }
 
   .frame__bottom {
@@ -299,6 +307,28 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .mobile-nav__icon--case { border: var(--line) solid currentColor; border-radius: 2px; }
+  .mobile-nav__icon--case::before {
+    content: "";
+    position: absolute;
+    top: -4px;
+    left: 5px;
+    width: 8px;
+    height: 4px;
+    border: var(--line) solid currentColor;
+    border-bottom: none;
+    border-radius: 2px 2px 0 0;
+  }
+  .mobile-nav__icon--case::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 0;
+    width: 100%;
+    height: var(--line);
+    background: currentColor;
   }
 
   .mobile-nav__icon--info {

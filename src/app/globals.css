@@ -29,6 +29,11 @@
   --ink-dim: rgba(13, 13, 13, 0.6);
   --ink-body: rgba(13, 13, 13, 0.74);
   --ink-ghost: rgba(13, 13, 13, 0.16);
+  --blue: #1769ff;
+  /* ...inside the white/ink token block... */
+  --blue-dim: rgba(255, 255, 255, 0.65);
+  --blue-body: rgba(255, 255, 255, 0.82);
+  --blue-ghost: rgba(255, 255, 255, 0.25);
   --frame-bg: var(--paper);
   --frame-fg: var(--charcoal);
   --frame-fg-dim: var(--ink-dim);
@@ -55,6 +60,14 @@
   --fg-body: var(--white-body);
   --fg-ghost: var(--white-ghost);
   background: var(--charcoal);
+  color: var(--fg);
+}
+.theme-blue {
+  --fg: var(--white);
+  --fg-dim: var(--blue-dim);
+  --fg-body: var(--blue-body);
+  --fg-ghost: var(--blue-ghost);
+  background: var(--blue);
   color: var(--fg);
 }
 .theme-paper {

@@ -55,7 +55,7 @@ export default function Lens() {
     });
 
     /* Pinned, scrubbed: the photo opens to fill the frame */
-    gsap.set(image, { clipPath: "inset(64% 3% 0% 3%)" });
+    gsap.set(image, { clipPath: "inset(100% 3% 0% 3%)" });
     gsap.set(photo, { scale: 1.25 });
     gsap.set(year, { autoAlpha: 0 });
 
@@ -82,7 +82,7 @@ export default function Lens() {
   }, root);
 
   return (
-    <section className="lens theme-paper" ref={root} data-frame="paper" aria-label="Art in the lens">
+    <section className="lens theme-ink" id="about" ref={root} data-frame="ink" aria-label="Art in the lens">
       <div className="lens__text">
         <h2 className="lens__title">
           <span className="lens__word">{lens.words[0]}</span>
