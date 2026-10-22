@@ -21,6 +21,7 @@ import "../styles/cursor.css";
 import "../styles/statement.css";
 import "../styles/experience.css";
 import "../styles/lens.css";
+import "../styles/projects.css";
 
 export const metadata: Metadata = {
   title: "Aperture — Visual Lookbook",
