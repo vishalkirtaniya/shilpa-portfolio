@@ -8,6 +8,7 @@ const page = (n: number) => `/images/projects/iro-iro/lookbook/${n}.png`;
 
 export const iroIro = {
   title: "IRO IRO",
+  year: "2023",
   scroller: [1, 2, 3, 4, 5].map((n) => ({
     src: hero(n),
     alt: `IRO IRO Pyaar collection ${n}`,

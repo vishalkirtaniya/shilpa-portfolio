@@ -21,7 +21,7 @@ export default function IroIroLookbook() {
   return (
     <div className="project theme-paper" data-trail="light">
       <RopeCursor />
-      <ProjectHeader title={iroIro.title} />
+      <ProjectHeader title={iroIro.title} year={iroIro.year} />
 
       {/* Scroller */}
       <section className="project-scroller">
@@ -81,9 +81,8 @@ export default function IroIroLookbook() {
             <h3>Softwares used: Adobe InDesign, Adobe Photoshop</h3>
           </div>
         </section>
-
-        <ProjectFooter />
       </div>
+      <ProjectFooter />
     </div>
   );
 }
