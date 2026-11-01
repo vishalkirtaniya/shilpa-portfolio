@@ -19,7 +19,7 @@
 
   --charcoal: #0d0d0d;
   --charcoal-soft: #1a1a1a;
-  --paper: #f8f1ec;
+  --paper: #ffffff;
   --coral: #ec6844;
 
   --white: #ffffff;
@@ -29,7 +29,7 @@
   --ink-dim: rgba(13, 13, 13, 0.6);
   --ink-body: rgba(13, 13, 13, 0.74);
   --ink-ghost: rgba(13, 13, 13, 0.16);
-  --blue: #1769ff;
+  --blue:  #0057ff;
   /* ...inside the white/ink token block... */
   --blue-dim: rgba(255, 255, 255, 0.65);
   --blue-body: rgba(255, 255, 255, 0.82);

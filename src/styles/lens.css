@@ -95,3 +95,44 @@
   .lens__underline { width: 90%; }
   .lens__cols { grid-template-columns: 1fr; margin-left: 0; gap: 12px; }
 }
+
+/* ========================================================
+   LENS — an empty space + the image that grows to fill it
+   ======================================================== */
+
+.lens {
+  position: relative;
+  height: var(--inner-h);
+  min-height: 520px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* the empty space that stands in for the old text block — it fills the
+   screen with paper until the photo is revealed over it */
+.lens__space { flex: 1; }
+
+/* The image sits above the space and is revealed with clip-path */
+.lens__image {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+.lens__image img { object-fit: cover; }
+
+.lens__year {
+  position: absolute;
+  left: clamp(14px, 2vw, 28px);
+  bottom: clamp(14px, 3vh, 32px);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  color: var(--white);
+  z-index: 3;
+}
