@@ -4,8 +4,8 @@
 
 .lens {
   position: relative;
-  height: var(--inner-h);
-  min-height: 520px;
+  height: 200px;
+  min-height: 70px;
   overflow: hidden;
   padding: clamp(20px, 5vh, 56px) clamp(16px, 3vw, 48px);
   /* text block fills the screen on its own; the photo is revealed by scroll */

@@ -49,16 +49,15 @@ export type HeroCard = {
 export const heroCards: HeroCard[] = [
   { src: img("architectural-interior"), x: 6, y: 13, w: 0.95, r: 0.78, depth: 0.6 },
   { src: img("aperture-camera"), x: 23, y: 5, w: 0.8, r: 1, depth: 0.9, pos: "62% 50%", desktopOnly: true },
-  { src: img("minimalist-interior"), x: 42, y: 9, w: 1.05, r: 0.8, depth: 0.5 },
-  { src: img("evening-interior"), x: 62, y: 6, w: 0.85, r: 0.8, depth: 0.85, desktopOnly: true },
-  { src: img("panoramic-view"), x: 77, y: 14, w: 1.1, r: 0.78, depth: 0.7 },
-  { src: img("natural-stone-surface"), x: 90, y: 6, w: 0.75, r: 0.7, depth: 0.4, desktopOnly: true },
+  { src: img("minimalist-interior"), x: 47, y: 9, w: 1.05, r: 0.8, depth: 0.5 },
+  { src: img("evening-interior"), x: 68, y: 6, w: 0.85, r: 0.8, depth: 0.85, desktopOnly: true },
+  { src: img("panoramic-view"), x: 85, y: 10, w: 1.1, r: 0.78, depth: 0.7 },
   { src: img("textural-detail"), x: 2, y: 45, w: 0.8, r: 1, depth: 0.8, desktopOnly: true },
-  { src: img("contemporary-residential"), x: 10, y: 67, w: 1, r: 0.8, depth: 0.55, label: "Warm Void" },
+  { src: img("contemporary-residential"), x: 10, y: 67, w: 1, r: 0.8, depth: 0.55 },
   { src: img("aperture-camera"), x: 27, y: 81, w: 0.75, r: 0.8, depth: 0.95, pos: "20% 40%", desktopOnly: true },
   { src: img("evening-interior"), x: 46, y: 84, w: 0.9, r: 1, depth: 0.45, pos: "80% 50%" },
-  { src: img("architectural-interior"), x: 64, y: 78, w: 1, r: 0.75, depth: 0.75, pos: "72% 50%", label: "The Atrium" },
-  { src: img("panoramic-view"), x: 82, y: 67, w: 0.95, r: 0.8, depth: 0.6, pos: "25% 50%", label: "Framed Horizon" },
+  { src: img("architectural-interior"), x: 64, y: 78, w: 1, r: 0.75, depth: 0.75, pos: "72% 50%" },
+  { src: img("panoramic-view"), x: 82, y: 67, w: 0.95, r: 0.8, depth: 0.6, pos: "25% 50%"},
   { src: img("minimalist-interior"), x: 91, y: 44, w: 0.8, r: 0.8, depth: 0.9, pos: "88% 50%", desktopOnly: true },
 ];
 
