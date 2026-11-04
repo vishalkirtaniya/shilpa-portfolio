@@ -10,23 +10,29 @@ import Star from "./Star";
  * - A chain of points, each easing toward the one before it, drawn as one
  *   smooth curve on a canvas. A sine wobble that grows with pointer speed
  *   gives it the loose, looping look.
- * - Colour follows the surface underneath: coral on paper, white on ink.
- *   Sections opt in with data-trail="light" | "dark"; elsewhere it fades out.
+ * - The line is blue (#1769ff) everywhere, except on the blue section itself,
+ *   where it switches to white so it doesn't disappear. The section under the
+ *   pointer decides: an explicit data-trail="light" | "dark" | "onBlue" wins,
+ *   otherwise it follows that section's data-frame.
  * - Elements with data-cursor="badge" swap the pointer for a rotating star.
  * - Fine-pointer devices only; skipped for reduced motion.
  */
 
 const POINTS = 26;
-const CORAL = "236,104,68";
+const BLUE = "23,105,255"; // #1769ff
+const WHITE = "255,255,255";
 
-type Theme = "light" | "dark" | null;
-const FRAME_TO_TRAIL: Record<string, Theme> = { paper: "light", ink: "dark", blue: "dark" };
+type Trail = "light" | "dark" | "onBlue";
+type Theme = Trail | null;
+// blue on paper and on ink; white on the blue section (blue-on-blue is invisible)
+const TRAIL_RGB: Record<Trail, string> = { light: BLUE, dark: BLUE, onBlue: WHITE };
+const FRAME_TO_TRAIL: Record<string, Trail> = { paper: "light", ink: "dark", blue: "onBlue" };
 
 /** Trail colour for whatever the pointer is over, or undefined if it's over
  *  no section at all (e.g. the frame's nav) — in which case we keep the last one. */
-function trailFor(target: Element | null): Theme | undefined {
+function trailFor(target: Element | null): Trail | undefined {
   const explicit = target?.closest("[data-trail]")?.getAttribute("data-trail");
-  if (explicit === "light" || explicit === "dark") return explicit;
+  if (explicit === "light" || explicit === "dark" || explicit === "onBlue") return explicit;
   const frame = target?.closest<HTMLElement>("[data-frame]")?.dataset.frame;
   return frame ? FRAME_TO_TRAIL[frame] : undefined;
 }
@@ -67,6 +73,7 @@ export default function RopeCursor() {
     const pts = Array.from({ length: POINTS }, () => ({ x: -200, y: -200 }));
     const mouse = { x: -200, y: -200 };
     let theme: Theme = null;
+    let rgb = BLUE; // kept after the pointer leaves, so the fade-out keeps its colour
     let started = false;
     let alpha = 0;
     let speed = 0;
@@ -105,7 +112,10 @@ export default function RopeCursor() {
 
       const target = e.target as Element | null;
       const next = trailFor(target);
-      if (next !== undefined) theme = next;
+      if (next !== undefined) {
+        theme = next;
+        rgb = TRAIL_RGB[next];
+      }
       setBadge(!!target?.closest('[data-cursor="badge"]'));
     };
     const onLeave = () => {
@@ -160,8 +170,7 @@ export default function RopeCursor() {
       ctx.lineWidth = 1.5;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
-      ctx.strokeStyle =
-        theme === "dark" ? `rgba(255,255,255,${alpha * 0.9})` : `rgba(${CORAL},${alpha})`;
+      ctx.strokeStyle = `rgba(${rgb},${alpha})`;
       ctx.stroke();
     };
     gsap.ticker.add(draw);

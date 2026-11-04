@@ -7,6 +7,13 @@ import "@fontsource/cormorant-garamond/400.css";
 import "@fontsource/cormorant-garamond/400-italic.css";
 import "@fontsource/roboto-mono/300.css";
 import "@fontsource/roboto-mono/400.css";
+import "@fontsource/russo-one/400.css";
+import "@fontsource/funnel-display/300.css";
+import "@fontsource/funnel-display/400.css";
+import "@fontsource/funnel-display/700.css";
+import "@fontsource/space-grotesk/300.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
 
 import "lenis/dist/lenis.css";
 import "./globals.css";

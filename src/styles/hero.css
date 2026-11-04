@@ -51,14 +51,43 @@
   padding: 24px 32px;
 }
 
+/* Title typeface presets — pick one with `hero.titleFont` in content.ts.
+   "serif" (or anything else) falls back to the original Cormorant look. */
+.hero[data-title-font="russo"] {
+  --hero-font: var(--font-russo);
+  --hero-weight: 400;
+  --hero-tracking: 0.04em;
+  --hero-em-style: normal; /* these fonts have no true italic */
+}
+.hero[data-title-font="funnel"] {
+  --hero-font: var(--font-funnel);
+  --hero-weight: 300;
+  --hero-tracking: 0.06em;
+  --hero-em-style: normal;
+}
+.hero[data-title-font="grotesk"] {
+  --hero-font: var(--font-grotesk);
+  --hero-weight: 400;
+  --hero-tracking: 0.06em;
+  --hero-em-style: normal;
+}
+
 .hero__title {
-  font-family: var(--serif);
+  font-family: var(--hero-font, var(--serif));
   font-size: clamp(48px, 10vw, 140px);
-  font-weight: 300;
-  letter-spacing: 0.12em;
+  font-weight: var(--hero-weight, 300);
+  letter-spacing: var(--hero-tracking, 0.12em);
   text-transform: uppercase;
   line-height: 0.9;
   margin-bottom: 24px;
+}
+.hero__line--em .hero__line-inner {
+  font-style: var(--hero-em-style, italic);
+  font-weight: var(--hero-weight, 300);
+  font-size: 0.55em;
+  letter-spacing: calc(var(--hero-tracking, 0.125em) * 2);
+  opacity: 0.6;
+  margin-top: 8px;
 }
 .hero__line { display: block; }
 .hero__line-inner { display: inline-block; will-change: transform; }

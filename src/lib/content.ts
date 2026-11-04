@@ -12,7 +12,7 @@ export const brand = {
 };
 
 export const nav = [
-  { href: "#lookbook", label: "Lookbook" },
+  { href: "#lookbook", label: "Home" },
   { href: "#about", label: "Projects" },
   { href: "#experience", label: "Work Experience" },
   { href: "#contact", label: "Contact" },

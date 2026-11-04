@@ -94,7 +94,7 @@ export default function Hero() {
   }, root);
 
   return (
-    <section className="hero theme-paper" data-frame="paper" data-trail="light" ref={root}>
+    <section className="hero theme-paper" data-frame="paper" data-title-font={hero.titleFont} data-trail="light" ref={root}>
       <div className="hero__cards" aria-hidden="true">
         {heroCards.map((c, i) => (
           <div

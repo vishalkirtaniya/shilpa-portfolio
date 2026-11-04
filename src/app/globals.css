@@ -11,7 +11,10 @@
 }
 
 :root {
-  /* frame thickness: top/left/right = --frame, bottom = --frame-bottom */
+   /* hero title options (see hero.titleFont in content.ts) */
+  --font-russo: "Russo One", "Arial Black", sans-serif;
+  --font-funnel: "Funnel Display", system-ui, sans-serif;
+  --font-grotesk: "Space Grotesk", system-ui, sans-serif; /* frame thickness: top/left/right = --frame, bottom = --frame-bottom */
   --frame: 40px;
   --frame-bottom: 40px;
   /* height of the visible area *inside* the frame */
