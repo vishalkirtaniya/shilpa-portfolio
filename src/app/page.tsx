@@ -21,7 +21,7 @@ export default function Page() {
         <Lens />
         <Plates />
         <Experience />
-        <Journal />
+        {/* <Journal /> */}
         <Contact />
       </main>
     </>

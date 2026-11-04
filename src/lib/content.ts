@@ -13,19 +13,21 @@ export const brand = {
 
 export const nav = [
   { href: "#lookbook", label: "Lookbook" },
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#journal", label: "Journal" },
+  { href: "#about", label: "Projects" },
+  { href: "#experience", label: "Work Experience" },
   { href: "#contact", label: "Contact" },
 ];
 
 export const social = ["Instagram", "Behance", "Vimeo"];
 
 /* ---------------------------------------------------------------- Hero */
+export type HeroTitleFont = "serif" | "russo" | "funnel" | "grotesk";
 
 export const hero = {
-  lines: ["Silent", "Volumes"], // second line renders in italic
+  lines: ["Silent", "Volumes"], // second line is smaller and fainter
   subtitle: "Spring / Summer — 2026 Collection",
+  /** Title typeface — try each: "serif" (original) | "russo" | "funnel" | "grotesk" */
+  titleFont: "funnel" as HeroTitleFont,
 };
 
 export type HeroCard = {
