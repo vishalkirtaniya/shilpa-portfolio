@@ -7,6 +7,10 @@ export const setLenis = (l: Lenis | null) => {
 };
 export const getLenis = () => instance;
 
+/** True while a nav link is driving the scroll — the Lens photo-snap stays out of its way. */
+let navigating = false;
+export const isNavigating = () => navigating;
+
 /** Thickness of the frame's top gutter in px (read from the --frame CSS var). */
 export function frameOffset(): number {
   if (typeof window === "undefined") return 0;
@@ -25,10 +29,15 @@ export function scrollToHash(hash: string) {
 
   const lenis = getLenis();
   const ease = (t: number) => 1 - Math.pow(1 - t, 4);
-
   if (lenis) {
-    if (isTop) lenis.scrollTo(0, { duration: 1.6, easing: ease });
-    else lenis.scrollTo(el!, { offset: -frameOffset(), duration: 1.6, easing: ease });
+    navigating = true;
+    const done = () => {
+      navigating = false;
+    };
+    const opts = { duration: 1.6, easing: ease, onComplete: done };
+    if (isTop) lenis.scrollTo(0, opts);
+    else lenis.scrollTo(el!, { ...opts, offset: -frameOffset() });
+    window.setTimeout(done, 2200); // safety net if the scroll is interrupted
     return;
   }
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
