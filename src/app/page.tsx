@@ -19,7 +19,7 @@ export default function Page() {
         <Hero />
         {/* <Statement /> */}
         <Lens />
-        <Plates />
+        {/*<Plates /> */}
         <Experience />
         {/* <Journal /> */}
         <Contact />

@@ -77,15 +77,16 @@ export const statement = {
 };
 
 /* ---------------------------------------------------------------- Lens */
-
 export const lens = {
   words: ["Art", "In The Lens"],
-  columns: [
-    "Every plate begins with a single decision: what to leave out. The frame is the argument, the silence around it is the evidence.",
-    "Scroll on to step inside the frame — twelve interiors, shot across three countries and one long afternoon.",
+  columns: [ /* unchanged */ ],
+  images: [
+    { src: img("architectural-interior"), alt: "Architectural interior with natural light" },
+    { src: img("minimalist-interior"), alt: "Minimalist interior space with sculptural furniture" },
+    { src: img("contemporary-residential"), alt: "Contemporary residential space with warm tonal palette" },
+    { src: img("panoramic-view"), alt: "Panoramic view through an architectural framework" },
+    { src: img("evening-interior"), alt: "Evening interior with warm ambient lighting" },
   ],
-  image: img("panoramic-view"),
-  imageAlt: "Panoramic view through an architectural framework",
   year: "2026",
 };
 
