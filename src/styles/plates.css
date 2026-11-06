@@ -79,21 +79,21 @@
   font-style: normal;
 }
 
-/* Diptych */
-.lookbook__diptych {
+/* Triptych */
+.lookbook__triptych {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 2px;
-  height: calc(var(--inner-h) * 0.7);
+  height: var(--inner-h); /* exactly one viewport */
   min-height: 320px;
   margin: 2px 0;
 }
-.lookbook__diptych-panel { overflow: hidden; position: relative; }
-.lookbook__diptych-panel img {
+.lookbook__triptych-panel { overflow: hidden; position: relative; }
+.lookbook__triptych-panel img {
   object-fit: cover;
   filter: brightness(0.85);
 }
-.lookbook__diptych-label {
+.lookbook__triptych-label {
   position: absolute;
   bottom: 20px;
   left: 20px;
