@@ -1,4 +1,5 @@
 import type Lenis from "lenis";
+import { ScrollTrigger } from "@/lib/gsap";
 
 let instance: Lenis | null = null;
 
@@ -21,6 +22,17 @@ export function frameOffset(): number {
   );
 }
 
+/**
+ * If the target is a pinned section (the Lens), return the scroll position
+ * where its pin begins. Measuring the element itself is wrong once we're
+ * below it: after the pin ends the element sits at the *end* of its pin
+ * spacer, so a plain scroll-to-element would land on the last photo.
+ */
+function pinStart(el: HTMLElement): number | null {
+  const st = ScrollTrigger.getAll().find((t) => t.trigger === el && t.pin);
+  return st ? st.start : null;
+}
+
 /** Scroll to a #hash target, landing just below the frame gutter. */
 export function scrollToHash(hash: string) {
   const isTop = hash === "#lookbook" || hash === "#top";
@@ -35,12 +47,15 @@ export function scrollToHash(hash: string) {
       navigating = false;
     };
     const opts = { duration: 1.6, easing: ease, onComplete: done };
+    const pinned = isTop ? null : pinStart(el!);
     if (isTop) lenis.scrollTo(0, opts);
+    else if (pinned !== null) lenis.scrollTo(pinned, opts); // pin start already includes the frame offset
     else lenis.scrollTo(el!, { ...opts, offset: -frameOffset() });
     window.setTimeout(done, 2200); // safety net if the scroll is interrupted
     return;
   }
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const top = isTop ? 0 : el!.getBoundingClientRect().top + window.scrollY - frameOffset();
+  const pinned = isTop ? null : pinStart(el!);
+  const top = isTop ? 0 : pinned ?? el!.getBoundingClientRect().top + window.scrollY - frameOffset();
   window.scrollTo({ top, behavior: reduce ? "auto" : "smooth" });
 }
