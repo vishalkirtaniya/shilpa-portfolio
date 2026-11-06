@@ -77,18 +77,19 @@ export const statement = {
 };
 
 /* ---------------------------------------------------------------- Lens */
-
 export const lens = {
   words: ["Art", "In The Lens"],
   columns: [
     "Every plate begins with a single decision: what to leave out. The frame is the argument, the silence around it is the evidence.",
     "Scroll on to step inside the frame — twelve interiors, shot across three countries and one long afternoon.",
   ],
-  image: img("panoramic-view"),
-  imageAlt: "Panoramic view through an architectural framework",
+  images: [
+    { src: img("architectural-interior"), alt: "Architectural interior with natural light" },
+    { src: img("minimalist-interior"), alt: "Minimalist interior space with sculptural furniture" },
+    { src: img("contemporary-residential"), alt: "Contemporary residential space with warm tonal palette" },
+  ],
   year: "2026",
 };
-
 /* -------------------------------------------------------------- Plates */
 
 export type Plate = {
@@ -145,11 +146,12 @@ export const quote = {
   cite: "Le Corbusier",
 };
 
-export const diptych = {
-  n: "04",
+export const triptych = {
+  n: "01",
   panels: [
-    { src: img("textural-detail"), alt: "Textural detail of concrete and timber joinery", label: "Detail — 04a" },
-    { src: img("natural-stone-surface"), alt: "Natural stone surface with dramatic side lighting", label: "Detail — 04b" },
+    { src: img("textural-detail"), alt: "Textural detail of concrete and timber joinery", label: "Detail — 01a" },
+    { src: img("natural-stone-surface"), alt: "Natural stone surface with dramatic side lighting", label: "Detail — 01b" },
+    { src: img("evening-interior"), alt: "Evening interior with warm ambient lighting", label: "Detail — 01c" },
   ],
 };
 

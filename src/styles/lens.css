@@ -1,3 +1,4 @@
+
 /* ========================================================
    LENS — "Art ✦ In The Lens" + the image that grows to fill
    ======================================================== */
@@ -109,9 +110,8 @@
   flex-direction: column;
 }
 
-/* the empty space that stands in for the old text block — it fills the
-   screen with paper until the photo is revealed over it */
-.lens__space { flex: 1; }
+/* breathing room between the hero and the photo stack */
+.lens-gap { height: 100px; }
 
 /* The image sits above the space and is revealed with clip-path */
 .lens__image {

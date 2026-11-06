@@ -17,8 +17,10 @@ export default function Page() {
       <Frame />
       <main className="lookbook" id="lookbook">
         <Hero />
+        <div className="lens-gap theme-paper" aria-hidden="true" />
         {/* <Statement /> */}
         <Lens />
+        
         <Plates />
         <Experience />
         {/* <Journal /> */}
